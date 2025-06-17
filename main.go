@@ -17,9 +17,13 @@ func main() {
 
 	// Register API endpoints
 	r.POST("/accounts", routes.CreateAccount)
-	r.GET("/accounts/:id", routes.GetAccount)
+	r.GET("/accounts", routes.GetAllAccounts)
 	r.PUT("/accounts/:id", routes.UpdateAccount)
 	r.DELETE("/accounts/:id", routes.DeleteAccount)
 
-	r.Run(":8081") // Start server on port 8081
+	for _, route := range r.Routes() {
+		println("Route:", route.Method, route.Path)
+	}
+
+	r.Run(":8088") // Start server on port 8081
 }

@@ -20,15 +20,13 @@ func CreateAccount(c *gin.Context) {
 	c.JSON(http.StatusCreated, account)
 }
 
-func GetAccount(c *gin.Context) {
-	id, _ := strconv.Atoi(c.Param("id"))
-	var account models.Account
-	result := config.DB.First(&account, id)
-	if result.Error != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Account not found"})
+func GetAllAccounts(c *gin.Context) {
+	var accounts []models.Account
+	if err := config.DB.Find(&accounts).Error; err != nil {
+		c.JSON(500, gin.H{"error": "Failed to fetch accounts"})
 		return
 	}
-	c.JSON(http.StatusOK, account)
+	c.JSON(200, accounts)
 }
 
 func UpdateAccount(c *gin.Context) {
