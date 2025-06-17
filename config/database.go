@@ -4,15 +4,17 @@ import (
 	"fmt"
 	"log"
 
-	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
+
 	"gorm.io/gorm"
 )
 
 var DB *gorm.DB // declare as global variable
 
 func ConnectDatabase() {
-	dsn := "root:Karuna@20@tcp(127.0.0.1:3306)/account_service?charset=utf8mb4&parseTime=True&loc=Local"
-	database, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	dsn := "host=localhost user=postgres password=root dbname=go-crud-poc port=5432 sslmode=disable"
+
+	database, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		log.Fatal("Failed to connect to database:", err)

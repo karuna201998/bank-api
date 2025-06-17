@@ -21,5 +21,5 @@ func main() {
 	r.PUT("/accounts/:id", routes.UpdateAccount)
 	r.DELETE("/accounts/:id", routes.DeleteAccount)
 
-	r.Run(":8080") // Start server on port 8080
+	r.Run(":8081") // Start server on port 8081
 }
